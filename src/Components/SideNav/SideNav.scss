@@ -1,0 +1,75 @@
+.SideNav{
+    background-color: var(--login-teal);
+    height: 100vh;
+    width: 20rem;
+    padding: 20px 0px 0px 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+
+    
+    color:white ;
+    font-family:var(--minor-font);
+
+    >img{
+        animation: profile_bobble 5s  infinite alternate;
+        width: 10rem;
+    }
+    span{
+        i{
+            font-family:var(--minor-font) ; 
+            font-style: normal;
+        }
+        
+        font-family:var(--major-font) ;
+        font-size: 1rem;
+        font-weight:100 ;
+        
+        justify-content: center;
+    }
+
+    ul{
+        list-style: none;
+        color:inherit;
+        font-style:inherit;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        
+
+        li{
+            display: flex;
+            gap:1rem;
+            align-items: center;
+            
+            height: 3.5rem;
+
+            >img{
+                color:inherit;
+                width:50px;
+                height: 50px;
+            }
+        }
+    }
+}
+
+@keyframes profile_bobble {
+    0%{
+        border-radius: 26% 74% 21% 79% / 64% 34% 66% 36%  ;
+        transform: scale(1.05);
+        
+    }
+
+    // 50%{
+    //     border-radius: 50% 50% 50% 50% / 50% 50% 50% 50% ;
+    // }
+
+    100%{
+        border-radius: 79% 21% 67% 33% / 23% 69% 31% 77%   ;
+        transform: scale(1);
+    }
+    
+}

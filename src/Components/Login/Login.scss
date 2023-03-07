@@ -24,6 +24,24 @@
         width: 75px;
         padding: 25px 10px;
     }
+
+    .alert{
+        background-color: var(--error-white);
+        border: 1.5px solid red;
+        
+        color:var(--error-red);
+        font-family: var(--major-font);
+        font-weight: 100;
+        font-size: 13px;
+        
+        display: flex;
+        justify-content: center;
+
+        padding: 5px;
+        width: 100%;
+        border-radius: 5px;
+        
+    }
     
     form{
         
@@ -54,6 +72,11 @@
 
             &:hover{
                 background-color: rgb(216, 214, 214);
+            }
+
+            &:disabled{
+                background-color: grey;
+                cursor: not-allowed;
             }
         }
 

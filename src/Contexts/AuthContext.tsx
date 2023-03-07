@@ -1,11 +1,15 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import {auth} from '../firebase-config';
+import {User} from 'firebase/auth';
 
 interface Authvalue{
-  currUser:String,
+  currUser:User,
   signup:Function,
-  login:Function
+  login:Function,
+  logout:Function
 }
+
+
 
 const AuthContext=React.createContext<Authvalue|null>(null);
 
@@ -15,15 +19,16 @@ export function useAuth(){
 
 export function AuthProvider({children}:{children:ReactNode}) {
   
-  const [currUser,setcurrUser]=useState<string>()
+  const [currUser,setcurrUser]=useState<User>()
   
   useEffect(()=>{
-    const unsubscriber=auth.onAuthStateChanged((user:any)=>{
-      setcurrUser(user)
+    const unsubscriber=auth.onAuthStateChanged((user)=>{
+      setcurrUser(user);
     });
     return unsubscriber;
   },[])
 
+  
   function signup(email:string,password:string){
     return auth.createUserWithEmailAndPassword(email,password);
   }
@@ -32,10 +37,15 @@ export function AuthProvider({children}:{children:ReactNode}) {
     return auth.signInWithEmailAndPassword(email,password);
   }
 
+  function logout(){
+    return auth.signOut();
+  }
+
   const value={
     currUser,
     login,
-    signup
+    signup,
+    logout
   }
   
   return (
