@@ -32,10 +32,12 @@ const Student = () => {
     <div className='Student'>
       
       <SideNav 
+      selection={selection}
       setSelection={setSelection}
       selectable = {{
         Home:<Home/>,
-        Calendar:<MessCut/>
+        Calendar:<MessCut/>,
+        
       }}
       />
     </div>

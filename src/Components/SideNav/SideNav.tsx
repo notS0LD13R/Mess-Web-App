@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import './SideNav.scss'
 import { useAuth } from '../../Contexts/AuthContext';
 import randimg from './picsumapi';
 
-import {ReactComponent as home_icon} from '../../assets/Icons/home-icon.svg'; 
-import {ReactComponent as calendar_icon} from '../../assets/Icons/calendar-icon.svg';
+import {AiOutlineHome,AiOutlineCalendar} from "react-icons/ai";
 
-function SideNav(props:{setSelection:Function,selectable:{[key:string]:JSX.Element}}) {
+function SideNav(
+  props:{
+  selection:string,
+  setSelection:React.Dispatch<React.SetStateAction<string>>,
+  selectable:{[key:string]:JSX.Element}
+    }
+  ) {
 
     const {currUser,logout}= useAuth()!;
 
     const [img,setImg]=useState<string>('');
-    
-    const setSelection=props.setSelection;
-    const selectables=Object.keys(props.selectable)
     
     function LogOut(){
         try {
@@ -22,35 +24,47 @@ function SideNav(props:{setSelection:Function,selectable:{[key:string]:JSX.Eleme
           console.log(error);
         }
       }
+    function handleSelect(e:SyntheticEvent){
+      console.log()
+      props.setSelection(e.target.id)
+    }
       
     useEffect( ()=>{
       const getimg= async ()=>{
-      
       setImg(await randimg());
     }
       getimg();
       console.log('called')
     },[]) 
     
-    const icon={
-      'Home':<home_icon/>,
-      'Calendar':<calendar_icon />
+    const icon:{[key:string]:JSX.Element}={
+      'Home':<AiOutlineHome/>,
+      'Calendar':<AiOutlineCalendar/>
     }
-    console.log(home_icon)
 
     return (
     
     <div className='SideNav'>
         <img src={img} alt="Profile Pic" />
         <span><i>Welcome,</i> { (currUser?currUser.email:'loading...')?.slice(0,-10)}</span>
-        { <ul>
+        
+        { 
+        <ul>
           {Object.keys(props.selectable).map((item)=>{
-            return <li key={item.toString()}>
-              {icon[item]}
-              {item}
+            return( 
+              <li 
+              key={item.toString()} 
+              className={(item==props.selection)?'active':''} 
+              id={item}
+              onClick={handleSelect}
+              >
+                {icon[item]}
+                {item}
               </li>
+            )
           })}
-        </ul> }
+        </ul> 
+        }
         <button onClick={LogOut}>Log Out</button>
     </div>
     
