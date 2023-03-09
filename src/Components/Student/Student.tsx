@@ -25,7 +25,10 @@ const Student = () => {
 
   },[currUser])
 
-  
+  const rightcomp:{[key:string]:JSX.Element} ={
+    'Home':<Home/>,
+    'Calendar':<MessCut/>
+  }
   
   return (
     
@@ -34,12 +37,13 @@ const Student = () => {
       <SideNav 
       selection={selection}
       setSelection={setSelection}
-      selectable = {{
-        Home:<Home/>,
-        Calendar:<MessCut/>,
+      selectable = {[
+        'Home',
+        'Calendar'
         
-      }}
+      ]}
       />
+      {rightcomp[selection]}
     </div>
 
 

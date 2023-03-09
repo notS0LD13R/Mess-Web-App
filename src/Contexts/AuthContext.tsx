@@ -1,9 +1,9 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import {auth} from '../firebase-config';
-import {User} from 'firebase/auth';
+import firebase from 'firebase/compat';
 
 interface Authvalue{
-  currUser:User,
+  currUser:firebase.User,
   signup:Function,
   login:Function,
   logout:Function
@@ -19,7 +19,7 @@ export function useAuth(){
 
 export function AuthProvider({children}:{children:ReactNode}) {
   
-  const [currUser,setcurrUser]=useState<User>()
+  const [currUser,setcurrUser]=useState<firebase.User|null>(null)
   
   useEffect(()=>{
     const unsubscriber=auth.onAuthStateChanged((user)=>{

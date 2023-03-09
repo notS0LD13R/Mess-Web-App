@@ -91,7 +91,35 @@
             }
         }
     }
+    .logoutbtn{
+        background-color: white;
+        border-radius: 30px;
+        width: 125px;
+        color: var(--login-teal);
+        border: 0;
+        font-size: 1.1rem;
+        padding: 10px 0px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        cursor: pointer;
+
+        &:hover{
+            color: red;
+            background-color: rgb(216, 214, 214);
+        }
+        
+        svg{
+           display: inline-block; 
+           width: 25px;
+           height: 25px;
+        }
+    }
 }
+
 
 @keyframes profile_bobble {
     0%{

@@ -1,15 +1,15 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import './SideNav.scss'
 import { useAuth } from '../../Contexts/AuthContext';
-import randimg from './picsumapi';
+import randimg from '../../API/picsumapi';
 
-import {AiOutlineHome,AiOutlineCalendar} from "react-icons/ai";
+import {AiOutlineHome,AiOutlineCalendar,AiOutlineLogout} from "react-icons/ai";
 
 function SideNav(
   props:{
   selection:string,
   setSelection:React.Dispatch<React.SetStateAction<string>>,
-  selectable:{[key:string]:JSX.Element}
+  selectable:Array<string>
     }
   ) {
 
@@ -26,7 +26,7 @@ function SideNav(
       }
     function handleSelect(e:SyntheticEvent){
       console.log()
-      props.setSelection(e.target.id)
+      props.setSelection((e.target as HTMLElement).id)
     }
       
     useEffect( ()=>{
@@ -50,7 +50,7 @@ function SideNav(
         
         { 
         <ul>
-          {Object.keys(props.selectable).map((item)=>{
+          {props.selectable.map((item)=>{
             return( 
               <li 
               key={item.toString()} 
@@ -65,7 +65,7 @@ function SideNav(
           })}
         </ul> 
         }
-        <button onClick={LogOut}>Log Out</button>
+        <button className="logoutbtn" onClick={LogOut}>  Log Out <AiOutlineLogout/></button>
     </div>
     
   
