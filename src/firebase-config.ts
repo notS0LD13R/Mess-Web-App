@@ -10,7 +10,6 @@ const app = firebase.initializeApp({
     appId: import.meta.env.VITE_REACT_APP_appId,
     measurementId:import.meta.env.VITE_REACT_APP_measurementId 
   });
-
 export const auth = app.auth();
 export default app;
   

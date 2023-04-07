@@ -14,7 +14,6 @@ function SideNav(
   ) {
 
     const {currUser,logout}= useAuth()!;
-
     const [img,setImg]=useState<string>('');
     
     function LogOut(){
@@ -34,7 +33,6 @@ function SideNav(
       setImg(await randimg());
     }
       getimg();
-      console.log('called')
     },[]) 
     
     const icon:{[key:string]:JSX.Element}={
