@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import SideNav from '../SideNav/SideNav'
 import Home from './Home'
-import MessCut from './MessCut'
+import MessCut from './MessCut/MessCut'
 
 const Student = () => {
   
