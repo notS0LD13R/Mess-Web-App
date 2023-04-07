@@ -5,7 +5,7 @@ import Admin from './Components/Admin/Admin'
 import Student from './Components/Student/Student'
 
 function App() {
-
+  const temp=0;
   return (
     
       <Routes>
