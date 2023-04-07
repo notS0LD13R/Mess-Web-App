@@ -1,0 +1,140 @@
+.SideNav{
+    overflow-x: hidden;
+
+    background-color: var(--login-teal);
+    height: 100vh;
+    width: 20rem;
+    padding: 20px 0px 0px 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+
+    
+    color:white ;
+    font-family:var(--minor-font);
+
+    >img{
+        animation: profile_bobble 5s  infinite alternate;
+        width: 10rem;
+    }
+    span{
+        i{
+            font-family:var(--minor-font) ; 
+            font-style: normal;
+        }
+        
+        font-family:var(--major-font) ;
+        font-size: 1rem;
+        font-weight:100 ;
+        
+        justify-content: center;
+    }
+
+    ul{
+        list-style: none;
+        color:inherit;
+        font-style:inherit;
+        gap:1rem;
+
+        display: flex;
+        flex-direction: column;
+        //justify-content: space-evenly;
+        align-items: center;
+
+        width: 100%;
+        
+
+        li{
+            display: flex;
+            gap:1rem;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            
+            width: 100%;
+            height: 3.5rem;
+
+            font-weight: bolder;
+
+            cursor: pointer;
+
+            transition: transform 1s;
+
+            >svg{
+                color:inherit;
+                width: 25px;
+                height: 25px;
+            }
+
+            &:after{
+                content: '';
+                z-index: -1;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: white;
+                border-radius: 25px 0px 0px 25px;
+                transform: translate(100%);
+                transition: transform 1s;
+                
+            }
+            
+            &.active{
+                color: var(--login-teal);
+                &:after{
+                    transform: translate(1%);
+                }
+                
+            }
+        }
+    }
+    .logoutbtn{
+        background-color: white;
+        border-radius: 30px;
+        width: 125px;
+        color: var(--login-teal);
+        border: 0;
+        font-size: 1.1rem;
+        padding: 10px 0px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        cursor: pointer;
+
+        &:hover{
+            color: red;
+            background-color: rgb(216, 214, 214);
+        }
+        
+        svg{
+           display: inline-block; 
+           width: 25px;
+           height: 25px;
+        }
+    }
+}
+
+
+@keyframes profile_bobble {
+    0%{
+        border-radius: 26% 74% 21% 79% / 64% 34% 66% 36%  ;
+        transform: scale(1.05);
+        
+    }
+
+    // 50%{
+    //     border-radius: 50% 50% 50% 50% / 50% 50% 50% 50% ;
+    // }
+
+    100%{
+        border-radius: 79% 21% 67% 33% / 23% 69% 31% 77%   ;
+        transform: scale(1);
+    }
+    
+}

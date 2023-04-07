@@ -1,0 +1,17 @@
+:root{
+    --login-teal:#008080;
+    --error-white:#fadada;
+    --error-red:rgb(173, 54, 54);
+
+    --minor-font:'Comfortaa', cursive;
+    --major-font:'Unbounded', cursive;
+
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
