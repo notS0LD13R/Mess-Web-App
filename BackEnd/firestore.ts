@@ -4,19 +4,32 @@ import {
     collection,
     getDocs,
     where,
-    query
+    query,
+    DocumentData
 } from 'firebase/firestore'
+
+interface MessCut {
+    CutDays:[number],
+    ID:string
+}
 
  const db=getFirestore(app);
  
- export const fetchDoc=async ()=>{
-    const querySnapshot = await getDocs(collection(db, "temp"));
+ export const fetchDocbyID=async (collectionName:string,ID:string)=>{
     
+    const querySnapshot = await getDocs(
+        
+         query(
+             collection(db, collectionName),
+             where('ID','==',ID)
+         ) 
+        );
+    
+    const docArray:DocumentData[]=[];
     querySnapshot.forEach((doc)=>{
-        console.log(doc.data())
+        docArray.push(doc.data())
     })
-
-    return querySnapshot.empty
+    return docArray
  }
 
 

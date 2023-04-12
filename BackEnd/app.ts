@@ -1,12 +1,12 @@
 import express,{ Express,Request,Response } from "express";
-import { fetchDoc } from "./firestore";
+import { fetchDocbyID } from "./firestore";
 const app:Express=express();
 const port=8080
 
 app.use(express.json())
 
 app.get('/',async (req:Request,res:Response)=>{
-    res.send(await fetchDoc())
+    res.send(await fetchDocbyID('temp','B20DS063'))
 })
 
 
