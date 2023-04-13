@@ -4,7 +4,7 @@ import './Student.scss'
 import { useNavigate } from 'react-router-dom'
 
 import SideNav from '../SideNav/SideNav'
-import Home from './Home'
+import Home from './Home/Home'
 import MessCut from './MessCut/MessCut'
 
 const Student = () => {
@@ -17,11 +17,8 @@ const Student = () => {
   
 
   useEffect(()=>{
-    console.log('Student',currUser);
     if(!currUser)
       nav('/');
-    else
-      console.log(currUser.uid);
 
   },[currUser])
 

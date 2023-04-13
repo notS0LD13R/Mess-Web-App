@@ -24,7 +24,6 @@ function SideNav(
         }
       }
     function handleSelect(e:SyntheticEvent){
-      console.log()
       props.setSelection((e.target as HTMLElement).id)
     }
       

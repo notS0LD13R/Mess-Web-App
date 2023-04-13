@@ -1,6 +1,10 @@
 import React from 'react'
 import './Calendar.scss'
 
+const getDays=()=>{
+
+}
+
 export default function Calendar() {
     const date=new Date()
 
@@ -12,12 +16,14 @@ export default function Calendar() {
         <div className="dayname">
             {
                 ['SUN','MON','TUE','WED','THU','FRI','SAT']
-                .map((day)=> <h4>{day}</h4> )
+                .map((day)=> <h4 key={day}>{day}</h4> )
             }
         </div>
         <div className="days">
-
+            
         </div>
     </div>
   )
 }
+
+
