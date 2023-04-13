@@ -9,7 +9,11 @@ app.get('/fetchMessCutbyID',async (req,res)=>{
     const body=req.body
     try{
         const response=await fetchMessCutbyID('temp',body.ID)
-        res.status(200).send(response)
+        const result={
+            date:new Date(),
+            ...response
+        }
+        res.status(200).send(result)
     }
     catch(err){
         res.status(400).send(err)
@@ -18,8 +22,9 @@ app.get('/fetchMessCutbyID',async (req,res)=>{
 
 app.post('/updateMessCutbyID',async(req,res)=>{
     const body=req.body
+    const month=new Date().toLocaleString('default', { month: 'long' });
     try{
-        const response=await updateMessCutbyID('temp',body.ID,body.CutDays)
+        await updateMessCutbyID(month,body.ID,body.CutDays)
         res.status(200).send('Updated CutDays')
     }
     catch(err){
