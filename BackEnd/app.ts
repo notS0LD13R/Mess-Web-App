@@ -1,14 +1,17 @@
 import express,{ Express,Request,Response } from "express";
 import { fetchMessCutbyID,updateMessCutbyID } from "./firestore";
+import cors from 'cors';
+
 const app:Express=express();
 const port=8080
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/fetchMessCutbyID',async (req,res)=>{
-    const body=req.body
     try{
-        const response=await fetchMessCutbyID('temp',body.ID)
+        const response=await fetchMessCutbyID('temp',<string>req.query.ID)
+        
         const result={
             date:new Date(),
             ...response
