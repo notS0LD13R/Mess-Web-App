@@ -1,19 +1,19 @@
 import React from 'react'
-import 'Day.scss'
+import './Day.scss'
 
-interface Dayprop {
+export interface Dayprop {
     disabled:boolean,
     day:number,
     cut:boolean
 }
 
 
-export default function Day(props:Dayprop) {
+export  function Day(props:Dayprop) {
     return (
     <div className={
-        'Day' +
-        (props.cut ? 'cut' : '') +
-        (props.disabled ? 'disabled' : '') 
+        'Day ' +
+        (props.cut ? 'cut ' : '') +
+        (props.disabled ? 'disabled ' : '') 
         }>
         {props.day}
     </div>

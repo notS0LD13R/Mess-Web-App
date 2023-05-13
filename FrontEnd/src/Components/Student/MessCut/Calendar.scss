@@ -20,13 +20,33 @@
     .dayname{
         width: 100%;
         
-        display: flex;
-        justify-content: space-evenly;
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
 
         font-family: var(--minor-font);
 
+        h4{
+            display: grid;
+            justify-items: center;
+            align-items: center;
+        }
+    }
+
+    .days{
+        width: 100%;
+        height: 100%;
         
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
         
+        font-family: var(--minor-font);
+
+        .Day{
+            display: grid;
+            justify-items: center;
+            align-items: center;
+    
+        }
         
     }
 }

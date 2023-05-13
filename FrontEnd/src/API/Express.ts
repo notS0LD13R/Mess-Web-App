@@ -5,5 +5,6 @@ export const fetchMessCutbyID = async (ID:string)=>{
         ID:ID.slice(0,-10)
     })
     )
-    console.log(await res.json())
+    const data=await res.json()
+    return data
 }

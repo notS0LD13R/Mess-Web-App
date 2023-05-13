@@ -1,3 +1,10 @@
 .Day{
-    color:red;
+    &.disabled{
+        color: grey;
+        opacity: .95;
+    }
+
+    &.cut{
+        color:red;
+    }
 }

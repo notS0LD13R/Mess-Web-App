@@ -10,7 +10,7 @@ app.use(cors())
 
 app.get('/fetchMessCutbyID',async (req,res)=>{
     try{
-        const response=await fetchMessCutbyID('temp',<string>req.query.ID)
+        const response=await fetchMessCutbyID(new Date().toLocaleString('default', { month: 'long' }),<string>req.query.ID)
         
         const result={
             date:new Date(),
@@ -25,6 +25,7 @@ app.get('/fetchMessCutbyID',async (req,res)=>{
 
 app.post('/updateMessCutbyID',async(req,res)=>{
     const body=req.body
+    console.log(body)
     const month=new Date().toLocaleString('default', { month: 'long' });
     try{
         await updateMessCutbyID(month,body.ID,body.CutDays)
