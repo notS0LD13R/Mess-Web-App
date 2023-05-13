@@ -7,4 +7,10 @@
     &.cut{
         color:red;
     }
+
+    &:hover{
+        transition: all 200ms;
+        border-radius: 5px;
+        background-color: rgba($color: #ffffff, $alpha: .05);
+    }
 }
