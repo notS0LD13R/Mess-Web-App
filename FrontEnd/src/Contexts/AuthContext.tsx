@@ -39,6 +39,7 @@ export function AuthProvider({children}:{children:ReactNode}) {
   }
 
   function logout(){
+    sessionStorage.removeItem('calendar ')
     return auth.signOut();
   }
 
