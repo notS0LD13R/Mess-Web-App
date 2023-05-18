@@ -44,9 +44,7 @@ export  function Day(props:Dayprop) {
         if (cut && pos===-1 )
             arr.push(props.day)
         else if((!cut) && pos!==-1){
-            arr.splice(pos,1)
-            console.log(props.day,'popped')
-        }
+            arr.splice(pos,1)        }
         
             
         sessionStorage.setItem('calendar',JSON.stringify(props.data.current))

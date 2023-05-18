@@ -37,19 +37,19 @@ function getDayOffset(date:Date){
 
 
 
-export default function Calendar() {
+export default function Calendar(props:{data: React.MutableRefObject<fetchMessCutbyID_type | null>
+}) {
     const date=new Date()
     const userID=useAuth()!.currUser.email!
     const [Loading,setLoading]=useState<boolean>(true)
 
-    const data =useRef<fetchMessCutbyID_type|null>(null)
+    const data=props.data
     
     useEffect(()=>{
         (async ()=>{
             data.current=sessionStorage.getItem('calendar')?
             JSON.parse(sessionStorage.getItem('calendar')!):null
             
-            console.log('cal eff',data.current)
             
             if(!data.current){
                 setLoading(true)
@@ -57,7 +57,6 @@ export default function Calendar() {
                     data.current=await fetchMessCutbyID(userID)
                     console.log(data.current)
                     sessionStorage.setItem('calendar',JSON.stringify(data.current))
-                    console.log('api effect',data.current)
                 }
                 catch (err){
                     console.log(err)

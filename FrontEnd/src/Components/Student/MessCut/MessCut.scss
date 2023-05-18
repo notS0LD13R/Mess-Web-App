@@ -1,4 +1,32 @@
 .MessCut{
     width: 100%;
     padding: 3rem;
+
+    >button{
+        background-color: var(--login-teal);
+
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-left: auto;
+        border: 0;
+        border-radius: .5rem;
+
+        font-family: var(--major-font);
+        color: white;
+
+        &:disabled{
+            background-color: grey;
+
+            &:active{
+                background-color:grey;
+                transform: none;
+            }
+        }
+        
+        &:active{
+            background-color:rgb(2, 93, 93);
+            transform: scale(0.95);
+        }
+        
+    }
 }

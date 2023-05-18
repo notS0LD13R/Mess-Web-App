@@ -25,11 +25,11 @@ app.get('/fetchMessCutbyID',async (req,res)=>{
 
 app.post('/updateMessCutbyID',async(req,res)=>{
     const body=req.body
-    console.log(body)
+    console.log('app.ts',body)
     const month=new Date().toLocaleString('default', { month: 'long' });
     try{
         await updateMessCutbyID(month,body.ID,body.CutDays)
-        res.status(200).send('Updated CutDays')
+        res.status(200).send({msg:'MessCut Updated'})
     }
     catch(err){
         res.status(400).send(err)
