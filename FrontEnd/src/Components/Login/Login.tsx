@@ -34,7 +34,6 @@ const Login = () => {
   }
 
   useEffect(()=>{
-    console.log('Login',currUser);
     if(currUser)
         nav('/Student');
   },[currUser])

@@ -37,25 +37,26 @@ function getDayOffset(date:Date){
 
 
 
-export default function Calendar(props:{data: React.MutableRefObject<fetchMessCutbyID_type | null>
+export default function Calendar(props:{
+    data: React.MutableRefObject<fetchMessCutbyID_type | null>,
+    setDisabled: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-    const date=new Date()
-    const userID=useAuth()!.currUser.email!
     const [Loading,setLoading]=useState<boolean>(true)
-
+    const {currUser}=useAuth()!
     const data=props.data
     
     useEffect(()=>{
         (async ()=>{
+            const userID=currUser?.email!
             data.current=sessionStorage.getItem('calendar')?
             JSON.parse(sessionStorage.getItem('calendar')!):null
             
             
             if(!data.current){
                 setLoading(true)
+                props.setDisabled(true)
                 try{
                     data.current=await fetchMessCutbyID(userID)
-                    console.log(data.current)
                     sessionStorage.setItem('calendar',JSON.stringify(data.current))
                 }
                 catch (err){
@@ -64,6 +65,7 @@ export default function Calendar(props:{data: React.MutableRefObject<fetchMessCu
             }
             data.current!.date=new Date(data.current!.date)
             setLoading(false)
+            props.setDisabled(false)
         })();
         
     },[])
@@ -76,8 +78,8 @@ export default function Calendar(props:{data: React.MutableRefObject<fetchMessCu
     else{
         return (
         <div className='Calendar'>
-            <h2> {date.getFullYear()} </h2>
-            <h3> {date.toLocaleString('default', { month: 'long' })} </h3>
+            <h2> {data.current!.date.getFullYear()} </h2>
+            <h3> {data.current!.date.toLocaleString('default', { month: 'long' })} </h3>
             <div className="dayname">
                 {
                     ['SUN','MON','TUE','WED','THU','FRI','SAT']

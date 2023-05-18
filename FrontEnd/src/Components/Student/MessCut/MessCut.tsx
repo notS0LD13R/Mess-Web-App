@@ -9,6 +9,8 @@ function MessCut() {
   const data= useRef<fetchMessCutbyID_type | null>(null)
   const [disabled,setDisabled] = useState(false)
 
+  
+
   function handleClick(){
     setDisabled(true)
     setTimeout(()=>setDisabled(false),2500)
@@ -17,7 +19,7 @@ function MessCut() {
   
   return (
     <div className="MessCut">
-      <Calendar data={data}/>
+      <Calendar data={data} setDisabled={setDisabled}/>
       <button type="submit" disabled={disabled} onClick={handleClick}>Submit</button>
     </div>
   )

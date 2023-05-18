@@ -17,6 +17,7 @@ function SideNav(
     const [img,setImg]=useState<string>('');
     
     function LogOut(){
+      console.log(currUser)
         try {
            logout();
         } catch (error) {
