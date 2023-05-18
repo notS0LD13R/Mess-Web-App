@@ -1,41 +1,74 @@
-import {useRef} from 'react'
+import {useRef,useEffect, useState} from 'react'
 import './Day.scss'
 import anime from 'animejs'
-import { JsxElement } from 'typescript'
+import { fetchMessCutbyID_type } from './Calendar'
 
 export interface Dayprop {
     disabled:boolean,
     day:number,
-    cut:boolean
+    cut:boolean,
+    data:React.MutableRefObject<fetchMessCutbyID_type | null>
+
 }
 
 
 export  function Day(props:Dayprop) {
     
     const ref= useRef<HTMLDivElement>(null)
+    const mounted=useRef(false)
 
-    const animation=anime({
-        targets:ref.current,
-        keyframes:[
-            {rotateZ:45,scale:1.75},
-            {rotateZ:-45,scale:1.75},
-            {rotateZ:0,scale:1},
-        ],
-        duration:100,
-        autoplay:false,
-        loop:1
-    })
+    const [cut,setCut]=useState(props.cut)
 
+    const animation=useRef<anime.AnimeInstance>()
+    useEffect(()=>{
+        mounted.current=true
+
+        animation.current=  anime({
+            targets: ref.current,
+            keyframes:[
+                {rotateZ:5,scale:1.15},
+                {rotateZ:-5,scale:1.15},
+                {rotateZ:0,scale:1},
+            ],
+            duration:200,
+            autoplay:false,
+            easing:'linear',
+            loop:1
+        })
+    },[])
     
+    useEffect(()=>{//update CutDays when cut state changes
+        const arr=props.data.current!.CutDays
+        const pos=arr.indexOf(props.day)
+
+        if (cut && pos===-1 )
+            arr.push(props.day)
+        else if((!cut) && pos!==-1){
+            arr.splice(pos,1)
+            console.log(props.day,'popped')
+        }
+        
+            
+        sessionStorage.setItem('calendar',JSON.stringify(props.data.current))
+    },[cut])
+
+    function handleClick(){
+        
+        if (props.disabled)
+                animation.current!.play()
+        else //Toggle cut state
+            setCut(!cut)
+
+    }
+
     return (
-    <div className={
+    <div 
+    className={
         'Day ' +
-        (props.cut ? 'cut ' : '') +
+        (cut ? 'cut ' : '') +
         (props.disabled ? 'disabled ' : '') 
         }
-        onClick={()=>{
-            if (props.disabled) animation.play()
-        }}
+        onClick={handleClick}
         ref={ref}>
         {props.day}
     </div>

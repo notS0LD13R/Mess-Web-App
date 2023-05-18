@@ -6,28 +6,33 @@ import './Calendar.scss'
 import { Dayprop,Day } from './Day';
 
 
-interface fetchMessCutbyID_type {
+export interface fetchMessCutbyID_type {
     CutDays:Array<number>,
     ID:string,
-    date:Date
+    date:Date,
 }
 
 const getDaysInMonth = (date:Date)=> {
    return new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
   };
 
-const getDays=(data:fetchMessCutbyID_type)=>{
+//Returns array of Dayprops object 
+const getDays=(data:React.MutableRefObject<fetchMessCutbyID_type | null>)=>{
     const arr:Dayprop[]=[];
-    const NoOfDays=getDaysInMonth(data.date)
+    const NoOfDays=getDaysInMonth(data.current!.date)
     for (let i=1;i<NoOfDays+1;i++){
         arr.push({
-            disabled:i<2+data.date.getDate(),
+            disabled:i<2+data.current!.date.getDate(),
             day:i,
-            cut:data.CutDays.includes(i)
+            cut:data.current!.CutDays.includes(i),
+            data:data
         })
     }
-    console.log(arr)
     return arr
+}
+
+function getDayOffset(date:Date){
+    return (new Date(date.getFullYear(),date.getMonth(),1)).getDay()-1
 }
 
 
@@ -37,20 +42,29 @@ export default function Calendar() {
     const userID=useAuth()!.currUser.email!
     const [Loading,setLoading]=useState<boolean>(true)
 
-    const data =useRef<fetchMessCutbyID_type>()
+    const data =useRef<fetchMessCutbyID_type|null>(null)
     
     useEffect(()=>{
         (async ()=>{
-            setLoading(true)
-            try{
-                data.current=await fetchMessCutbyID(userID)
-                data.current!.date=new Date(data.current!.date)
-                console.log('effect',data.current)
-                setLoading(false)
+            data.current=sessionStorage.getItem('calendar')?
+            JSON.parse(sessionStorage.getItem('calendar')!):null
+            
+            console.log('cal eff',data.current)
+            
+            if(!data.current){
+                setLoading(true)
+                try{
+                    data.current=await fetchMessCutbyID(userID)
+                    console.log(data.current)
+                    sessionStorage.setItem('calendar',JSON.stringify(data.current))
+                    console.log('api effect',data.current)
+                }
+                catch (err){
+                    console.log(err)
+                }
             }
-            catch (err){
-                console.log(err)
-            }
+            data.current!.date=new Date(data.current!.date)
+            setLoading(false)
         })();
         
     },[])
@@ -72,7 +86,11 @@ export default function Calendar() {
                 }
             </div>
             <div className="days">
-                {getDays(data.current!).map((item)=><Day key = {`day${item.day}`} {...item}/>)}
+                {new Array(getDayOffset(data.current!.date)).fill(<div/>)}
+                {
+                getDays(data)
+                .map((item)=><Day key = {`day${item.day}`} {...item}/>)
+                }
             </div>
         </div>
         )

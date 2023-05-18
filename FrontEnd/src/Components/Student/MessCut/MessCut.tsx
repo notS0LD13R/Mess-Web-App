@@ -7,6 +7,7 @@ function MessCut() {
   return (
     <div className="MessCut">
       <Calendar/>
+      <button type="submit">fds</button>
     </div>
   )
 }
