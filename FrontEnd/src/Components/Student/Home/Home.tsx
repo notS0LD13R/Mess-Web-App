@@ -1,5 +1,8 @@
 import React,{useRef,useState} from 'react'
 import { useAuth } from '../../../Contexts/AuthContext'
+import './Home.scss'
+
+
 function Home() {
   
   const passref={
